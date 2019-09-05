@@ -30,13 +30,16 @@ export {
 # Help abide by the virus total query limits
 global query_limiter: set[string] &create_expire=1min;
 
-event bro_init()
+event zeek_init()
 	{
 	Log::create_stream(VirusTotal::LOG, [$columns=Report]);
 	}
 
 function VirusTotal::parse_result(report: Report, result: string)
 	{
+	if (report?$av_names)
+	   return;
+
 	report$hits = set();
 	report$av_names = set();
 

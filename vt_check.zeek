@@ -1,6 +1,6 @@
 @load base/frameworks/notice
 @load frameworks/files/hash-all-files
-@load /usr/share/bro/site/virustotal.bro
+@load ./virustotal.bro
 
 module VirusTotal;
 
