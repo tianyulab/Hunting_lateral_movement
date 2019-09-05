@@ -24,9 +24,10 @@ event file_hash(f: fa_file, kind: string, hash: string)
         {
         when ( local info = VirusTotal::scan_hash(f, hash) )
             {
-            if ( |info$hits| < hits_to_notice )
-                break;
-
+	    if (info?$hits)
+	       return;
+	       if ( |info$hits| < hits_to_notice )
+	       	  break;
             local downloader: addr = 0.0.0.0;
             for ( host in f$info$rx_hosts )
                 {
